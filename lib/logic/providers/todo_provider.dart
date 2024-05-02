@@ -4,37 +4,42 @@ import 'package:simple_todo_app/logic/todo.dart';
 class TodoNotifier extends StateNotifier<List<Todo>> {
   TodoNotifier() : super([]);
 
-  void addTodo(String description) {
-    state = [
-      ...state,
-      Todo(id: DateTime.now().toString(), description: description)
-    ];
+  void addTodo(String title, String description) {
+    final newTodo = Todo(
+      id: DateTime.now().toString(),
+      title: title,
+      description: description,
+      completed: false,
+    );
+    state = [...state, newTodo];
   }
 
-  void editTodo(String id, String newDescription) {
-    state = [
-      for (final todo in state)
-        if (todo.id == id)
-          Todo(
-              id: todo.id,
-              description: newDescription,
-              completed: todo.completed)
-        else
-          todo,
-    ];
+  void editTodo(String id, String newTitle, String newDescription) {
+    state = state.map((todo) {
+      if (todo.id == id) {
+        return Todo(
+          id: todo.id,
+          title: newTitle,
+          description: newDescription,
+          completed: todo.completed,
+        );
+      }
+      return todo;
+    }).toList();
   }
 
   void toggleTodoStatus(String id) {
-    state = [
-      for (final todo in state)
-        if (todo.id == id)
-          Todo(
-              id: todo.id,
-              description: todo.description,
-              completed: !todo.completed)
-        else
-          todo,
-    ];
+    state = state.map((todo) {
+      if (todo.id == id) {
+        return Todo(
+          id: todo.id,
+          title: todo.title,
+          description: todo.description,
+          completed: !todo.completed,
+        );
+      }
+      return todo;
+    }).toList();
   }
 
   void deleteTodo(String id) {
