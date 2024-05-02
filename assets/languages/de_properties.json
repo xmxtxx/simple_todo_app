@@ -1,2 +1,11 @@
 {
+  "addTodo": "Aufgabe hinzufügen",
+  "editTodo": "Aufgabe bearbeiten",
+  "enterTodoTitle": "Aufgabentitel eingeben",
+  "enterTodoDescription": "Aufgabenbeschreibung eingeben",
+  "cancel": "Abbrechen",
+  "save": "Speichern",
+  "delete": "Löschen",
+  "complete": "Abschließen",
+  "taskListTitle": "Aufgabenliste"
 }

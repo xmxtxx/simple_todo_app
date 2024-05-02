@@ -3,11 +3,29 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
 class ConfigDTO {
-  static const String _appConfig = 'appConfig';
+  static const String _appConfig = 'appConfig_';
 
-  final String logoImagePath;
+  final String addTodo;
+  final String editTodo;
+  final String enterTodoTitle;
+  final String enterTodoDescription;
+  final String cancel;
+  final String save;
+  final String delete;
+  final String complete;
+  final String taskListTitle;
 
-  ConfigDTO({required this.logoImagePath});
+  ConfigDTO({
+    required this.addTodo,
+    required this.editTodo,
+    required this.enterTodoTitle,
+    required this.enterTodoDescription,
+    required this.cancel,
+    required this.save,
+    required this.delete,
+    required this.complete,
+    required this.taskListTitle,
+  });
 
   static Future<ConfigDTO> parse(String language) async {
     final String configString;
@@ -31,11 +49,18 @@ class ConfigDTO {
     var languageJson = jsonLanguage;
     var appJsonConfig = jsonConfig[_appConfig];
     var appJsonConfigSecret = jsonConfigSecret[_appConfig];
-    var configJson = {}
-      ..addAll(appJsonConfig)
-      ..addAll(languageJson)
-      ..addAll(appJsonConfigSecret);
+    var configJson = {}..addAll(languageJson);
 
-    return ConfigDTO(logoImagePath: configJson['logoImagePath']);
+    return ConfigDTO(
+      addTodo: configJson['addTodo'],
+      editTodo: configJson['editTodo'],
+      enterTodoTitle: configJson['enterTodoTitle'],
+      enterTodoDescription: configJson['enterTodoDescription'],
+      cancel: configJson['cancel'],
+      save: configJson['save'],
+      delete: configJson['delete'],
+      complete: configJson['complete'],
+      taskListTitle: configJson['taskListTitle'],
+    );
   }
 }

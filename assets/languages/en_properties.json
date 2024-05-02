@@ -1,2 +1,11 @@
 {
+  "addTodo": "Add Todo",
+  "editTodo": "Edit Todo",
+  "enterTodoTitle": "Enter Todo Title",
+  "enterTodoDescription": "Enter Todo Description",
+  "cancel": "Cancel",
+  "save": "Save",
+  "delete": "Delete",
+  "complete": "Complete",
+  "taskListTitle": "Todo List"
 }
