@@ -10,12 +10,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_riverpod: 2.5.1
+  riverpod_annotation: 2.3.5
 
   cupertino_icons: 1.0.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  riverpod_generator: 2.4.0
+  riverpod_lint: 2.3.10
 
   flutter_lints: 3.0.2
 
