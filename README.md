@@ -1,6 +1,7 @@
 # Simple TodoApp
 
 This Project is a simple Todo app.
+It uses Simple providers from the  [riverpod](https://riverpod.dev) library
 
 ## Getting Started
 
