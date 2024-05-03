@@ -18,7 +18,7 @@ class TodoDialog extends StatelessWidget {
     required this.descriptionController,
     required this.isEditing,
     required this.viewModel,
-    this.todoId, // Optional todoId parameter
+    this.todoId,
   });
 
   @override
@@ -50,7 +50,7 @@ class TodoDialog extends StatelessWidget {
           onPressed: () {
             final title = titleController.text.trim();
             final description = descriptionController.text.trim();
-            if (title.isNotEmpty && description.isNotEmpty) {
+            if (title.isNotEmpty) {
               if (isEditing && todoId != null) {
                 ref
                     .read(todoProvider.notifier)
