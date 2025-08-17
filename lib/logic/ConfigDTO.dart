@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
 class ConfigDTO {
-  static const String _appConfig = 'appConfig_';
+  static const String _appConfig = 'appConfig';
 
   final String addTodo;
   final String editTodo;
@@ -36,17 +36,7 @@ class ConfigDTO {
 
     configString = await rootBundle.loadString('assets/config.json');
 
-    try {
-      configSecretString =
-          await rootBundle.loadString('assets/config_secrets.json');
-    } catch (e) {
-      // config_secrets.json is optional
-      configSecretString = null;
-    }
-
     final jsonConfig = jsonDecode(configString);
-    final jsonConfigSecret =
-        configSecretString != null ? jsonDecode(configSecretString) : {};
     final jsonLanguage = jsonDecode(languageString);
 
     if (!jsonConfig.containsKey(_appConfig)) {
@@ -54,8 +44,6 @@ class ConfigDTO {
     }
 
     var languageJson = jsonLanguage;
-    var appJsonConfig = jsonConfig[_appConfig];
-    var appJsonConfigSecret = jsonConfigSecret[_appConfig] ?? {};
     var configJson = {}..addAll(languageJson);
 
     return ConfigDTO(

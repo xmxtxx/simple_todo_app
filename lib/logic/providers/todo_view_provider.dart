@@ -5,7 +5,7 @@ import 'package:simple_todo_app/view_model/todo_view_model.dart';
 mixin TodoViewProvider {
   static final toDoViewProvider = Provider<ToDoViewModel>((ref) {
     var config = ref.watch(ConfigProvider.configProvider);
-    return config.maybeWhen(
+    return config.when(
         data: (value) => LoadedToDoViewModel(
             addTodo: value.addTodo,
             editTodo: value.editTodo,
@@ -16,6 +16,16 @@ mixin TodoViewProvider {
             delete: value.delete,
             complete: value.complete,
             taskListTitle: value.taskListTitle),
-        orElse: LoadingToDoViewModel.new);
+        loading: () => LoadingToDoViewModel(),
+        error: (error, stackTrace) => LoadedToDoViewModel(
+            addTodo: 'Add Todo',
+            editTodo: 'Edit Todo',
+            enterTodoTitle: 'Enter Todo Title',
+            enterTodoDescription: 'Enter Todo Description',
+            cancel: 'Cancel',
+            save: 'Save',
+            delete: 'Delete',
+            complete: 'Complete',
+            taskListTitle: 'Todo List (Error: Config failed to load)'));
   });
 }
