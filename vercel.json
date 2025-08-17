@@ -1,5 +1,5 @@
 {
-  "buildCommand": "if [ ! -d \"flutter\" ]; then git clone https://github.com/flutter/flutter.git -b stable --depth 1; fi && flutter/bin/flutter config --enable-web && flutter/bin/flutter pub get && flutter/bin/flutter build web --release",
+  "buildCommand": "if [ ! -d \"flutter\" ]; then git clone https://github.com/flutter/flutter.git -b stable --depth 1; fi && flutter/bin/flutter config --enable-web && flutter/bin/flutter pub get && flutter/bin/flutter build web --release --base-href=/",
   "outputDirectory": "build/web",
   "devCommand": "flutter/bin/flutter run -d web-server --web-hostname=0.0.0.0 --web-port=$PORT",
   "installCommand": "echo 'Flutter will be installed during build'"

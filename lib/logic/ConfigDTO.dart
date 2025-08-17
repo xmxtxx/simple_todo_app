@@ -29,26 +29,33 @@ class ConfigDTO {
 
   static Future<ConfigDTO> parse(String language) async {
     final String configString;
-    final String configSecretString;
+    String? configSecretString;
 
     final languageString = await rootBundle
         .loadString('assets/languages/${language}_properties.json');
 
     configString = await rootBundle.loadString('assets/config.json');
-    configSecretString =
-        await rootBundle.loadString('assets/config_secrets.json');
+
+    try {
+      configSecretString =
+          await rootBundle.loadString('assets/config_secrets.json');
+    } catch (e) {
+      // config_secrets.json is optional
+      configSecretString = null;
+    }
 
     final jsonConfig = jsonDecode(configString);
-    final jsonConfigSecret = jsonDecode(configSecretString);
+    final jsonConfigSecret =
+        configSecretString != null ? jsonDecode(configSecretString) : {};
     final jsonLanguage = jsonDecode(languageString);
-    if (!jsonConfig.containsKey(_appConfig) &&
-        jsonConfigSecret.containsKey(_appConfig)) {
+
+    if (!jsonConfig.containsKey(_appConfig)) {
       throw Exception('The required config is not found.');
     }
 
     var languageJson = jsonLanguage;
     var appJsonConfig = jsonConfig[_appConfig];
-    var appJsonConfigSecret = jsonConfigSecret[_appConfig];
+    var appJsonConfigSecret = jsonConfigSecret[_appConfig] ?? {};
     var configJson = {}..addAll(languageJson);
 
     return ConfigDTO(
